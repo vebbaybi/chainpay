@@ -10,7 +10,7 @@ from pathlib import Path
 
 from dateutil import parser as dateparser  # for odd time tokens
 
-WATERMARK = "Compiled with chainpay.py by webbaby"
+WATERMARK = "Compiled with chainpay.py by webbaby https://github.com/vebbaybi/chainpay/blob/main/chainpay.py"
 
 # ---------- Logging ----------
 LOGGER = logging.getLogger("workhour.parser")
