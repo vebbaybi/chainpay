@@ -1,0 +1,77 @@
+payday/
+├── __init__.py                 # Package marker, keeps imports explicit
+
+├── main.py                     # CLI entrypoint: reads input, calls parser, writes CSV
+
+├── core/                       # Core orchestration and parser
+│   ├── __init__.py
+│   └── parser.py               # WorkHourParser: orchestrates helpers, builds structured rows
+
+├── infra/                      # Infrastructure & shared definitions
+│   ├── __init__.py
+│   ├── logger.py        # Logger factory: configures stderr logger, INFO default
+│   └── constants.py            # Shared constants: WATERMARK, weekdays, minor words, defaults
+
+├── patterns/                   # Regex definitions
+│   ├── __init__.py
+│   └── patterns.py             # Regex: day tokens, time tokens, ranges, client/location, lunch
+
+├── utils/                      # General-purpose helpers
+│   ├── __init__.py
+│   ├── timeparse.py            # Time utilities: parse tokens, extract ranges, overnight spans
+│   ├── textutils.py            # Text normalization & casing: clean_text, title/sentence case, acronyms
+│   └── extractors.py           # Field extraction: derive_day, at/for/with chunks, eq-tail parsing
+
+└── policies/                   # Business logic & rules
+    ├── __init__.py
+    └── policies.py             # Lunch detection, cover-block dedupe, sum hours
+
+payday/__init__.py
+
+infra/__init__.py
+
+infra/constants.py
+
+infra/logger.py
+
+patterns/__init__.py
+
+patterns/patterns.py
+
+utils/__init__.py
+
+utils/textutils.py
+
+utils/timeparse.py
+
+utils/extractors.py
+
+policies/__init__.py
+
+policies/policies.py
+
+core/__init__.py
+
+core/parser.py
+
+io/__init__.py
+
+io/writer.py
+
+main.py
+
+infra/constants
+        │
+patterns/patterns ─┐
+        │           │
+utils/textutils     │
+        │           │
+utils/timeparse     │
+        │           │
+utils/extractors ───┤
+        │           │
+policies/policies ──┘
+        │
+core/parser  ────> io/writer   (parser returns rows; writer handles CSV)
+        │                │
+main.py ─────────────────┘   (uses parser + writer + infra/logger)
